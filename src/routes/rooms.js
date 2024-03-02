@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { Room } from "../models/room.js";
-import res from "express/lib/response.js";
+import { Player } from "../models/Player.js";
 
 // GET room by room name
 router.get("/:name", async (req, res) => {
@@ -20,7 +20,6 @@ router.get("/:name", async (req, res) => {
 
 // Create a Room
 router.post("/", async (req, res) => {
-  console.log(req.body);
   const room = new Room({
     name: req.body.name,
   });
@@ -30,6 +29,26 @@ router.post("/", async (req, res) => {
     res.status(201).json(newRoom);
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+});
+
+// GET players by room id
+router.get("/:roomId/players", async (req, res) => {
+  const { roomId } = req.params;
+
+  console.log(roomId);
+
+  try {
+    const room = await Room.findById(roomId);
+
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    const players = await Player.find({ roomId });
+    res.status(200).json(players);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 

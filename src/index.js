@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
 import roomsRouter from "./routes/rooms.js";
+import playersRouter from "./routes/players.js";
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 const db = mongoose.connection;
@@ -19,6 +20,7 @@ app.get("/api/test", async (req, res) => {
 });
 
 app.use("/api/rooms", roomsRouter);
+app.use("/api/players", playersRouter);
 
 app.listen(7000, () => {
   console.log("server running on localhost:7000");
