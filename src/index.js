@@ -1,3 +1,5 @@
+import http from "http";
+import { Server } from "socket.io";
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
@@ -22,6 +24,25 @@ app.get("/api/test", async (req, res) => {
 app.use("/api/rooms", roomsRouter);
 app.use("/api/players", playersRouter);
 
-app.listen(7000, () => {
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on("joinRoom", (data) => {
+    console.log(data);
+    socket.broadcast.emit("playerJoined" + data.roomName, data);
+    // socket.join(data.roomId);
+    // socket.to(data.roomId).emit("playerJoined", data.playerId);
+  });
+});
+
+server.listen(7000, () => {
   console.log("server running on localhost:7000");
 });
