@@ -38,8 +38,6 @@ io.on("connection", (socket) => {
   socket.on("joinRoom", (data) => {
     console.log(data);
     socket.broadcast.emit("playerJoined" + data.roomName, data);
-    // socket.join(data.roomId);
-    // socket.to(data.roomId).emit("playerJoined", data.playerId);
   });
 });
 

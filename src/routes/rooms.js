@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { Room } from "../models/room.js";
-import { Player } from "../models/Player.js";
+import { Player } from "../models/player.js";
 
 // GET room by room name
 router.get("/:name", async (req, res) => {

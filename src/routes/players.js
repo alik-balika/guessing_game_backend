@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { Player } from "../models/Player.js";
+import { Player } from "../models/player.js";
 import { Room } from "../models/room.js";
 
 // GET player by player id
