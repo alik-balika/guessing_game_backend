@@ -3,9 +3,6 @@ const router = express.Router();
 import { Room } from "../models/room.js";
 import { Player } from "../models/player.js";
 
-console.log(__dirname); // Print the current working directory
-console.log(path.join(__dirname, "../models/room.js")); // Check the constructed path
-
 // GET room by room name
 router.get("/:name", async (req, res) => {
   try {
