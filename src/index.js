@@ -13,6 +13,7 @@ db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("Connected to Database"));
 
 const app = express();
+const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -41,6 +42,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(7000, () => {
-  console.log("server running on localhost:7000");
+server.listen(port, () => {
+  console.log(`server running on localhost:${port}`);
 });
