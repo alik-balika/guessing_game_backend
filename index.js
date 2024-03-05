@@ -28,7 +28,7 @@ app.use("/api/players", playersRouter);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://alik-balika.github.io/guessing_game_frontend/",
     methods: ["GET", "POST"],
   },
 });
