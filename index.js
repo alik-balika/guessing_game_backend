@@ -4,8 +4,8 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
-import roomsRouter from "./routes/rooms.js";
-import playersRouter from "./routes/players.js";
+import roomsRouter from "./src/routes/rooms.js";
+import playersRouter from "./src/routes/players.js";
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 const db = mongoose.connection;
